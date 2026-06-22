@@ -10,17 +10,17 @@ const wss = new WebSocketServer({ server });
 app.use(express.static(path.join(__dirname, 'public')));
 
 const TOPICS = {
-  animals:    { icon:'🐾', words:['dog','cat','elephant','parrot','shark','penguin','giraffe','wolf','lion','dolphin','zebra','crocodile'] },
-  fruits:     { icon:'🍉', words:['mango','apple','watermelon','grape','pineapple','banana','kiwi','papaya','durian','guava','lychee','dragonfruit'] },
+  animals:    { icon:'🐾', words:['dog','cat','elephant','sheep','shark','snake','giraffe','wolf','lion','dolphin','zebra','crocodile'] },
+  fruits:     { icon:'🍉', words:['mango','apple','watermelon','grape','pineapple','banana','papaya','durian','guava','lychee','dragonfruit'] },
   countries:  { icon:'🌍', words:['Japan','Brazil','Ethiopia','Canada','Australia','Egypt','Norway','Mexico','Nigeria','Thailand','Argentina','Sweden'] },
   sports:     { icon:'⚽', words:['soccer','tennis','swimming','boxing','basketball','cycling','rugby','golf','volleyball','archery','fencing','sumo'] },
-  movies:     { icon:'🎬', words:['Titanic','Inception','Parasite','Avatar','Joker','Dune','Interstellar','Frozen','Oppenheimer','Alien','Gladiator','Matrix'] },
-  foods:      { icon:'🍕', words:['pizza','sushi','tacos','pasta','burger','injera','ramen','croissant','baklava','jollof','biryani','pho'] },
+  movies:     { icon:'🎬', words:['Titanic','Spider-Man','Minions','Avatar','Joker','Dune','Zootopia','Frozen','Goat','Gladiator','Matrix'] },
+  foods:      { icon:'🍕', words:['pizza','Ktfo','pasta','burger','injera','shiro','beg tbs','doro','gomen','biryani','water'] },
   jobs:       { icon:'💼', words:['teacher','doctor','pilot','chef','lawyer','engineer','farmer','musician','astronaut','spy','firefighter','surgeon'] },
-  colors:     { icon:'🎨', words:['crimson','turquoise','violet','amber','ivory','navy','scarlet','olive','magenta','cobalt','teal','vermillion'] },
+  colors:     { icon:'🎨', words:['crimson','red','black','white','green','blue','yellow','olive','magenta','cobalt','teal','vermillion'] },
   vehicles:   { icon:'🚀', words:['motorcycle','submarine','helicopter','tractor','speedboat','tram','rocket','skateboard','zeppelin','hovercraft','gondola','snowmobile'] },
   superheroes:{ icon:'🦸', words:['Spider-Man','Batman','Wonder Woman','Thor','Black Panther','Hulk','Flash','Superman','Deadpool','Aquaman','Iron Man','Wolverine'] },
-  music:      { icon:'🎵', words:['guitar','piano','drums','violin','trumpet','saxophone','flute','cello','ukulele','harp','banjo','accordion'] },
+  music:      { icon:'🎵', words:['guitar','piano','drums','violin','trumpet','saxophone'] },
   nature:     { icon:'🌿', words:['volcano','glacier','rainforest','desert','coral reef','waterfall','canyon','tundra','savanna','mangrove','geyser','fjord'] },
   girls:      { icon:'👧', words:['Saron 😍','Bitaniya (mia)','Leah (Shele one)','Melkam (Ahh)','Emrachel 😘','Maleda 🤢','Amal 🍑','Awnan 🍒','FeVen 👩🏿','FeBen (KSI)'] },
 };
@@ -263,6 +263,12 @@ wss.on('connection', ws => {
     if (msg.type === 'endGame' && isHost) {
       room.phase = 'scoreboard';
       broadcastAll(room, { type: 'phase', phase: 'scoreboard', state: publicState(room) });
+    }
+
+    if (msg.type === 'chat') {
+      const text = (msg.text || '').trim().slice(0, 200);
+      if (!text) return;
+      broadcastAll(room, { type: 'chat', playerId: player.id, name: player.name, avatar: player.avatar, text, time: Date.now() });
     }
 
     if (msg.type === 'restart' && isHost) {
