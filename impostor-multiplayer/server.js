@@ -14,7 +14,7 @@ const TOPICS = {
   fruits:     { icon:'🍉', words:['mango','apple','watermelon','grape','pineapple','banana','papaya','durian','guava','lychee','dragonfruit'] },
   countries:  { icon:'🌍', words:['Japan','Brazil','Ethiopia','Canada','Australia','Egypt','Norway','Mexico','Nigeria','Thailand','Argentina','Sweden'] },
   sports:     { icon:'⚽', words:['soccer','tennis','swimming','boxing','basketball','cycling','rugby','golf','volleyball','archery','fencing','sumo'] },
-  movies:     { icon:'🎬', words:['Titanic','Spider-Man','Minions','Avatar','Joker','Dune','Zootopia','Frozen','Goat','Gladiator','Matrix'] },
+  movies:     { icon:'🎬', words:['Despicable Me','Frozen','Toy Story','Finding Nemo','Shrek','Inside Out','Zootopia','Coco','Kung Fu Panda','Minions','Moana','The Incredibles','Cars','Ice Age','Madagascar'] },
   foods:      { icon:'🍕', words:['pizza','Ktfo','pasta','burger','injera','shiro','beg tbs','doro','gomen','biryani','water'] },
   jobs:       { icon:'💼', words:['teacher','doctor','pilot','chef','lawyer','engineer','farmer','musician','astronaut','spy','firefighter','surgeon'] },
   colors:     { icon:'🎨', words:['crimson','red','black','white','green','blue','yellow','olive','magenta','cobalt','teal','vermillion'] },
